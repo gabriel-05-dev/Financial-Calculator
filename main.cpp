@@ -1,15 +1,22 @@
 #include <cmath>
 #include <iostream>
 
+
 double calculateCompound(double principal, double annualInterestRate, int timesCompounded, int numberYears) {
     double finalAmount;
     finalAmount = principal* pow((1+annualInterestRate/timesCompounded), (timesCompounded*numberYears));
     return finalAmount;
 }
 
+double calculateLoan(double loanAmount, double interestRate, int numberOfMonths) {
+    interestRate = interestRate/12;
+    double repaymentPerMonth = loanAmount*(((interestRate)*pow(1 + interestRate, numberOfMonths)))/(pow((1+interestRate), numberOfMonths)-1);
+    return repaymentPerMonth;
+}
+
 double getAmount() {
     double amount;
-    std::cout << "Input amount to invest : " << std::endl;
+    std::cout << "Input principal ( amount taken on loan or investment) : " << std::endl;
     std::cin >> amount;
     return amount;
 }
@@ -35,14 +42,21 @@ int getYears() {
     return years;
 }
 
+int getMonths() {
+    int months;
+    std::cout << "Input months  : " << std::endl;
+    std::cin >> months;
+    return months;
+}
+
 
 
 int main() {
     int choice;
-    std::cout << "Welcome to the compound interest calculator.\nTo start, please choose either 1 or 2." << std::endl;
+    std::cout << "Welcome to the compound interest calculator.\nTo start, please choose either 1 or 2.\n" << std::endl;
     std::cout << "1. Compound interest\n2. Loan Payment" << std::endl;
     std::cin >> choice;
-    if (choice == 1) {
+    if (choice == 1) { //compound interest
        std::cout << "You have chosen : Compound interest" << std::endl;
        double amount = getAmount();
        double interestRate = getInterestRate();
@@ -50,9 +64,16 @@ int main() {
        double years = getYears();
        double answer = calculateCompound(amount, interestRate, compounded, years);
        std::cout << "The final amount is : " << answer << std::endl;
+    
     } else if (choice == 2) {
         std::cout << "You have chosen : Loan Payment" << std::endl;
+        double loanAmount = getAmount();
+        double interestRate = getInterestRate();
+        int time = getMonths();
+        double repayment = calculateLoan(loanAmount, interestRate, time);
+        std::cout << "Your monthly repayment is : " << repayment << std::endl;
+        std::cout << "The total interest you will pay is : " << (repayment*time) - loanAmount << std::endl; 
     }
 
-
+    return 0;
 }
