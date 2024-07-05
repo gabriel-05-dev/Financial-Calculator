@@ -1,7 +1,10 @@
+#include <cmath>
 #include <iostream>
 
-void calculateCompound(double principal, double interestRate, int timesCompounded, int numberYears) {
+double calculateCompound(double principal, double annualInterestRate, int timesCompounded, int numberYears) {
     double finalAmount;
+    finalAmount = principal* pow((1+annualInterestRate/timesCompounded), (timesCompounded*numberYears));
+    return finalAmount;
 }
 
 double getAmount() {
@@ -13,20 +16,20 @@ double getAmount() {
 
 double getInterestRate() {
     double interestRate;
-    std::cout << "Input annual interest rate : " << std::endl;
+    std::cout << "Input annual interest rate in decimal (e.g 2% = 0.02): " << std::endl;
     std::cin >> interestRate;
     return interestRate;
 }
 
-double getInterestCompounded() {
-    double timesCompounded;
+int getInterestCompounded() {
+    int timesCompounded;
     std::cout << "Input times interest rate compounded a year : " << std::endl;
     std::cin >> timesCompounded;
     return timesCompounded;
 }
 
-float getYears() {
-    float years;
+int getYears() {
+    int years;
     std::cout << "Input years  : " << std::endl;
     std::cin >> years;
     return years;
@@ -41,6 +44,12 @@ int main() {
     std::cin >> choice;
     if (choice == 1) {
        std::cout << "You have chosen : Compound interest" << std::endl;
+       double amount = getAmount();
+       double interestRate = getInterestRate();
+       double compounded = getInterestCompounded();
+       double years = getYears();
+       double answer = calculateCompound(amount, interestRate, compounded, years);
+       std::cout << "The final amount is : " << answer << std::endl;
     } else if (choice == 2) {
         std::cout << "You have chosen : Loan Payment" << std::endl;
     }
