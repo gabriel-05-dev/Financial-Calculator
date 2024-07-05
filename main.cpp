@@ -1,6 +1,43 @@
 #include <cmath>
 #include <iostream>
 
+double calculateCompound(double principal, double annualInterestRate, int timesCompounded, int numberYears);
+double calculateLoan(double loanAmount, double interestRate, int numberOfMonths);
+double getAmount();
+double getInterestRate();
+int getInterestCompounded();
+int getYears();
+int getMonths();
+
+int main() {
+    int choice;
+    std::cout << "Welcome to the compound interest calculator.\nTo start, please choose either 1 or 2.\n" << std::endl;
+    std::cout << "1. Compound interest\n2. Monthly Loan repayment" << std::endl;
+    std::cin >> choice;
+    if (choice == 1) { //compound interest
+       std::cout << "You have chosen : Compound interest" << std::endl;
+       double amount = getAmount();
+       double interestRate = getInterestRate();
+       double compounded = getInterestCompounded();
+       double years = getYears();
+       double answer = calculateCompound(amount, interestRate, compounded, years);
+       std::cout << "The final amount is : " << answer << std::endl;
+    
+    } else if (choice == 2) {
+        std::cout << "You have chosen : Loan Payment" << std::endl;
+        double loanAmount = getAmount();
+        double interestRate = getInterestRate();
+        int time = getMonths();
+        double repayment = calculateLoan(loanAmount, interestRate, time);
+        std::cout << "Your monthly repayment is : " << repayment << std::endl;
+        std::cout << "The total interest you will pay is : " << (repayment*time) - loanAmount << std::endl; 
+    } else {
+        std::cout << "Invalid or no choice made. program will now exit." << std::endl;
+        return 0;
+    }
+
+    return 0;
+}
 
 double calculateCompound(double principal, double annualInterestRate, int timesCompounded, int numberYears) {
     double finalAmount;
@@ -50,30 +87,3 @@ int getMonths() {
 }
 
 
-
-int main() {
-    int choice;
-    std::cout << "Welcome to the compound interest calculator.\nTo start, please choose either 1 or 2.\n" << std::endl;
-    std::cout << "1. Compound interest\n2. Loan Payment" << std::endl;
-    std::cin >> choice;
-    if (choice == 1) { //compound interest
-       std::cout << "You have chosen : Compound interest" << std::endl;
-       double amount = getAmount();
-       double interestRate = getInterestRate();
-       double compounded = getInterestCompounded();
-       double years = getYears();
-       double answer = calculateCompound(amount, interestRate, compounded, years);
-       std::cout << "The final amount is : " << answer << std::endl;
-    
-    } else if (choice == 2) {
-        std::cout << "You have chosen : Loan Payment" << std::endl;
-        double loanAmount = getAmount();
-        double interestRate = getInterestRate();
-        int time = getMonths();
-        double repayment = calculateLoan(loanAmount, interestRate, time);
-        std::cout << "Your monthly repayment is : " << repayment << std::endl;
-        std::cout << "The total interest you will pay is : " << (repayment*time) - loanAmount << std::endl; 
-    }
-
-    return 0;
-}
