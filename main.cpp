@@ -1,8 +1,38 @@
 #include <iostream>
 
-void calculateCompound(double amount, double principal, double interestRate, int timesCompounded, int numberYears) {
-
+void calculateCompound(double principal, double interestRate, int timesCompounded, int numberYears) {
+    double finalAmount;
 }
+
+double getAmount() {
+    double amount;
+    std::cout << "Input amount to invest : " << std::endl;
+    std::cin >> amount;
+    return amount;
+}
+
+double getInterestRate() {
+    double interestRate;
+    std::cout << "Input annual interest rate : " << std::endl;
+    std::cin >> interestRate;
+    return interestRate;
+}
+
+double getInterestCompounded() {
+    double timesCompounded;
+    std::cout << "Input times interest rate compounded a year : " << std::endl;
+    std::cin >> timesCompounded;
+    return timesCompounded;
+}
+
+float getYears() {
+    float years;
+    std::cout << "Input years  : " << std::endl;
+    std::cin >> years;
+    return years;
+}
+
+
 
 int main() {
     int choice;
